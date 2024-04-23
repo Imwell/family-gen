@@ -1,0 +1,47 @@
+server:
+  port: 8888
+  max-http-header-size: 10000000
+
+spring:
+  datasource:
+    druid:
+      driver-class-name: com.mysql.jdbc.Driver
+      username: root
+      password: 123456
+      url: jdbc:mysql://localhost:3306/waxt?useUnicode=true&characterEncoding=utf8&useSSL=false
+      max-active: 20
+      min-idle: 2
+      max-wait: 5000
+      keep-alive: true
+      keep-alive-between-time-millis: 30000
+      #一个连接在池中最小生存的时间
+      min-evictable-idle-time-millis: 40000
+      validation-query: select 1
+      time-between-eviction-runs-millis: 60000
+  mvc:
+    view:
+      prefix: /pages/
+      suffix: .jsp
+    dispatch-trace-request: true
+  devtools:
+    restart:
+      enabled: true
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 1000MB
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.wdata.system.model
+logging:
+  level:
+    org.springframework.web: debug
+    org.mybatis: info
+    com.wdata: debug
+    org.springframework.transaction: debug
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+debug: false
