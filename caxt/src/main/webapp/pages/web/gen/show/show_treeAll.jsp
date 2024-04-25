@@ -33,7 +33,6 @@
             <button class="layui-btn layui-btn-sm" lay-submit="" lay-filter="submit_form">生成</button>
         </div>
         <a class="layui-btn layui-btn-sm" style="line-height:1.6em;margin-top:3px;float:right;margin-left: 10px;"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
-        <a class="layui-btn layui-btn-sm" style="margin-top:3px;float:right;margin-left: 10px;"  onclick="reloadData();" title="重新生成">重新生成</a>
         <a class="layui-btn layui-btn-normal layui-btn-sm" style="margin-top:3px;float:right;margin-left: 10px;" onclick="importImg()">导出图片</a>
     </div>
     <div id="chart-container"></div>
@@ -128,27 +127,6 @@
             'exportFilename':'家谱',
 //            'exportFileextension': 'pdf',
             'exportFilename': 'MyOrgChart'
-        });
-    }
-
-    function reloadData(){
-        layer.confirm('确定要重新生成吗？因数据太大需要更多的时间！', function(index){
-            var index = layer.load(1, {
-                shade: [0.1,'#000'] //0.1透明度的白色背景
-            });
-            $.ajax({
-                type: "GET",//方法类型
-                dataType: "json",//预期服务器返回的数据类型
-                url: "${pageContext.request.contextPath}/gen/show/reloadData",//url
-                data: "",
-                success: function (res) {
-                    layer.closeAll();
-                    window.location.reload();
-                },
-                error : function(XMLHttpRequest, textStatus, errorThrown) {
-                    console.log("异常！"+XMLHttpRequest+":"+textStatus+":"+errorThrown);
-                }
-            });
         });
     }
 

@@ -42,11 +42,18 @@
             </td>
         </tr>
         <tr>
-            <td width="20%" align="right"><label class="layui-form-label">添加妻子</label></td>
-            <td colspan="3"><input type="checkbox" name="open_wife" readonly lay-filter="openButton" <c:if test="${p.open_wife == 'on'}"> checked </c:if>  title="开启【添加妻子】功能"></td>
+            <td width="20%" align="right"><label class="layui-form-label">性别：</label></td>
+            <td colspan="3">
+                <input type="radio" name="sex" value="1" title="男" checked="${p.sex==1}">
+                <input type="radio" name="sex" value="0" title="女" checked="${p.sex==0}">
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" align="right"><label class="layui-form-label">添加丈夫(妻子)</label></td>
+            <td colspan="3"><input type="checkbox" name="open_wife" readonly lay-filter="openButton" <c:if test="${p.open_wife == 'on'}"> checked </c:if>  title="开启【添加丈夫(妻子)】功能"></td>
         </tr>
         <tr id="button_tr" style="display: none;">
-            <td width="20%" align="right"><label class="layui-form-label">妻子</label></td>
+            <td width="20%" align="right"><label class="layui-form-label">丈夫(妻子)</label></td>
             <td colspan="3">
                 <div style="width:564px; overflow:auto;">
                     <table class="layui-table" style="width:564px;">

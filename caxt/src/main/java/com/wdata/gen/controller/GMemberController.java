@@ -220,7 +220,6 @@ public class GMemberController extends BaseController {
                 if(Verify.verifyIsNotNull(request.getParameterValues("w_name"))) {
                     String[] w_name = request.getParameterValues("w_name");
                     String[] w_content = request.getParameterValues("w_content");
-//                String[] w_tpdz = request.getParameterValues("w_tpdz");
                     String[] w_level = request.getParameterValues("w_level");
                     String[] w_remark = request.getParameterValues("w_remark");
                     for (int i = 0; i < w_name.length; i++) {
@@ -228,7 +227,6 @@ public class GMemberController extends BaseController {
                         p.put("member_id", member_id);
                         p.put("name", w_name[i]);
                         p.put("content", w_content[i]);
-//                    p.put("tpdz",w_tpdz[i]);
                         p.put("level", w_level[i]);
                         p.put("remark", w_remark[i]);
                         p.put("create_user", pd.get("create_user"));
@@ -257,7 +255,7 @@ public class GMemberController extends BaseController {
     public String toUpdate(ModelMap map,HttpServletRequest request)  {
         PageData pd = new PageData(request);
         PageData p = memberService.findInfo(pd);
-        //查询妻子列表
+        //查询丈夫(妻子)列表
         pd.put("member_id",p.get("id"));
         List<PageData> list = memberService.findWifeList(pd);
 
@@ -298,7 +296,6 @@ public class GMemberController extends BaseController {
                     String[] w_id = request.getParameterValues("w_id");
                     String[] w_name = request.getParameterValues("w_name");
                     String[] w_content = request.getParameterValues("w_content");
-//                    String[] w_tpdz = request.getParameterValues("w_tpdz");
                     String[] w_level = request.getParameterValues("w_level");
                     String[] w_remark = request.getParameterValues("w_remark");
                     for (int i = 0; i < w_name.length; i++) {
@@ -308,7 +305,6 @@ public class GMemberController extends BaseController {
                             p.put("member_id",member_id);
                             p.put("name",w_name[i]);
                             p.put("content",w_content[i]);
-//                            p.put("tpdz",w_tpdz[i]);
                             p.put("level",w_level[i]);
                             p.put("remark",w_remark[i]);
                             p.put("update_time",time);
@@ -318,7 +314,6 @@ public class GMemberController extends BaseController {
                             p.put("member_id",member_id);
                             p.put("name",w_name[i]);
                             p.put("content",w_content[i]);
-//                            p.put("tpdz",w_tpdz[i]);
                             p.put("level",w_level[i]);
                             p.put("remark",w_remark[i]);
                             p.put("create_user",pd.get("create_user"));

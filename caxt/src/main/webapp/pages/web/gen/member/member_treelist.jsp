@@ -87,6 +87,13 @@
                 ,{field:'family_name', title: '家族名称', width:120, sort: true, fixed: true}
                 ,{field:'generation_name', title: '世代名称'}
                 ,{field:'name', title: '姓名'}
+                ,{field:'sex', title: '性别', templet: function (d) {
+                    if(d.sex === 1){
+                        return '男';
+                    } else {
+                        return '女';
+                    }
+                }}
                 ,{field:'level_name', title: '排行'}
                 ,{field:'order_by', title: '排序', width:60}
                 ,{field:'create_time', title: '创建时间'}

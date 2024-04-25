@@ -14,6 +14,8 @@
 			a.content as "content",
 			a.tpdz as "tpdz",
 			a.level as "level",
+			a.self as "self",
+			a.sex as "sex",
 			a.order_by as "order_by",
 			a.open_wife as "open_wife",
 			a.remark as "remark",
@@ -113,6 +115,8 @@
 				a.content as "content",
 				a.tpdz as "tpdz",
 				a.level as "level",
+				a.sex as "sex",
+				a.self as "self",
 				a.order_by as "order_by",
 				a.open_wife as "open_wife",
 				a.remark as "remark",
@@ -161,6 +165,7 @@
 			a.open_wife as "open_wife",
 			a.remark as "remark",
 			a.self as "self",
+			a.sex as "sex",
 			a.create_user as "create_user",
 			a.create_organize as "create_organize",
 			a.create_org_cascade as "create_org_cascade",
@@ -174,9 +179,9 @@
 	<!--保存-->
 	<insert id="save" parameterType="com.wdata.base.util.PageData">
 		insert into gen_member
-		(family_id,generation_id,father_id,mother_id,name,content,tpdz,level,self,order_by,open_wife,remark,create_user,create_organize,create_org_cascade,create_time,update_time)
+		(family_id,generation_id,father_id,mother_id,name,content,tpdz,level,self,sex,order_by,open_wife,remark,create_user,create_organize,create_org_cascade,create_time,update_time)
 		values
-		(#{family_id},#{generation_id},#{father_id},#{mother_id},#{name},#{content},#{tpdz},#{level},${self},#{order_by},#{open_wife},#{remark},#{create_user},#{create_organize},#{create_org_cascade},#{create_time},#{update_time})
+		(#{family_id},#{generation_id},#{father_id},#{mother_id},#{name},#{content},#{tpdz},#{level},#{self},#{sex},#{order_by},#{open_wife},#{remark},#{create_user},#{create_organize},#{create_org_cascade},#{create_time},#{update_time})
 		<selectKey keyProperty="id" resultType="int" order="AFTER">
 			select LAST_INSERT_ID()
 		</selectKey>
@@ -218,6 +223,9 @@
 		</if>
 		<if test="self != null and self != '' ">
 			self=#{self},
+		</if>
+		<if test="sex != null and sex != '' ">
+			sex=#{sex},
 		</if>
 		open_wife=#{open_wife},
 		update_time=#{update_time}

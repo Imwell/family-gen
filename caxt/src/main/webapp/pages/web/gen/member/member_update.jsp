@@ -43,11 +43,18 @@
             </td>
         </tr>
         <tr>
-            <td width="20%" align="right"><label class="layui-form-label">添加妻子</label></td>
-            <td colspan="3"><input type="checkbox" name="open_wife" lay-filter="openButton" <c:if test="${p.open_wife == 'on'}"> checked </c:if>  title="开启【添加妻子】功能"></td>
+            <td width="20%" align="right"><label class="layui-form-label">性别：</label></td>
+            <td colspan="3">
+                <input type="radio" name="sex" value="1" title="男">
+                <input type="radio" name="sex" value="0" title="女">
+            </td>
+        </tr>
+        <tr>
+            <td width="20%" align="right"><label class="layui-form-label">添加丈夫(妻子)</label></td>
+            <td colspan="3"><input type="checkbox" name="open_wife" lay-filter="openButton" <c:if test="${p.open_wife == 'on'}"> checked </c:if>  title="开启【添加丈夫(妻子)】功能"></td>
         </tr>
         <tr id="button_tr" style="display: none;">
-            <td width="20%" align="right"><label class="layui-form-label">妻子</label></td>
+            <td width="20%" align="right"><label class="layui-form-label">丈夫(妻子)</label></td>
             <td colspan="3">
                 <div style="width:564px; overflow:auto;">
                     <table class="layui-table" style="width:564px;">
@@ -205,7 +212,17 @@
             return false;
         });
 
-        $("input[name='self']").get(0).checked = ${p.self} === 1
+        if (${p.self} === 1) {
+            $("input[name='self']").get(0).checked = true;
+        } else {
+            $("input[name='self']").get(1).checked = true;
+        }
+
+        if (${p.sex} === 1) {
+            $("input[name='sex']").get(0).checked = true;
+        } else {
+            $("input[name='sex']").get(1).checked = true;
+        }
         form.render()
 
     });
