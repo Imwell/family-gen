@@ -142,3 +142,6 @@
 	}
 	
 }
+.layui-form .layui-form-label {
+	width: 80%;
+}

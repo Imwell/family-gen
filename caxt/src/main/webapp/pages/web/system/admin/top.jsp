@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/table.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/wdata-style.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/layout.css" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugins/layui/layui.js"></script>
     <!--导出公共插件-->

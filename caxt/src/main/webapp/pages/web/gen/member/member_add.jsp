@@ -21,7 +21,7 @@
         </td>
     </tr>
     <tr>
-        <td width="20%" align="right"><label class="layui-form-label">父亲名称：</label></td>
+        <td width="20%" align="right"><label class="layui-form-label">父亲(母亲)名称：</label></td>
         <td colspan="3">
             <select name="father_id" id="father_id" lay-search="" style="height: 30px;width: 190px;float: right;">
             </select>
@@ -34,10 +34,7 @@
     <tr>
         <td width="20%" align="right"><label class="layui-form-label">家中排行：</label></td>
         <td colspan="3">
-            <select name="level" id="level" onchange="" style="height: 30px;width: 190px;float: right;"  class="layui-input layui-unselect tfield-all">
-                <c:forEach items="${levelLs}" var="var" varStatus="status">
-                    <option value="${var.id}">${var.name}</option>
-                </c:forEach>
+            <select name="level" id="level" style="height: 30px;width: 190px;float: right;"  class="layui-input layui-unselect tfield-all">
             </select>
         </td>
     </tr>
@@ -147,7 +144,7 @@
             $.ajax({
                 type: "POST",//方法类型
                 dataType: "json",//预期服务器返回的数据类型
-                url: "${pageContext.request.contextPath}/gen/member/save" ,//url
+                url: "${pageContext.request.contextPath}/gen/member/save",
                 data: $('#form').serialize(),
                 success: function (res) {
                     if (res.success) {
@@ -244,35 +241,68 @@
 
 
     function selectGeneration(){
-        var family_id = $('#family_id option:selected') .val();
-        var generation_id = $('#generation_id option:selected') .val();
-        if(generation_id!=''&&generation_id!=null){
-            $.ajax({
-                type: "GET",//方法类型
-                dataType: "json",//预期服务器返回的数据类型
-                url: "${pageContext.request.contextPath}/gen/member/findFatherList?family_id="+family_id+"&generation_id="+generation_id,//url
-                data: "",
-                success: function (res) {
-                    if (res.success) {
-                        var tt = '<option value=""></option>';
-                        $.each(res.data,function(i,n){
-                            tt += '<option value="'+ n.id+'">'+ n.name+'</option>';
-                        });
-                        $("#father_id").html(tt);
-                        form.render('select');
-                    }else{
-                        if(res.loseSession=='loseSession'){
-                            loseSession(res.msg,res.url);
-                        }else{
-                            layer.msg(res.msg, {time: 2000});
-                        }
-                    }
-                },
-                error : function() {
-                    layer.msg("异常！");
-                }
-            });
+        const family_id = $('#family_id option:selected').val();
+        const generation_id = $('#generation_id option:selected').val();
+        if(generation_id !== '' && generation_id !== null){
+            getGeneration(family_id, generation_id)
+            getLevel(family_id, generation_id)
         }
+    }
+
+    function getGeneration(family_id, generation_id) {
+        $.ajax({
+            type: "GET",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "${pageContext.request.contextPath}/gen/member/findFatherList?family_id="+family_id+"&generation_id="+generation_id,//url
+            data: "",
+            success: function (res) {
+                if (res.success) {
+                    var tt = '<option value=""></option>';
+                    $.each(res.data,function(i,n){
+                        tt += '<option value="'+ n.id+'">'+ n.name+'</option>';
+                    });
+                    $("#father_id").html(tt);
+                    form.render('select');
+                }else{
+                    if(res.loseSession=='loseSession'){
+                        loseSession(res.msg,res.url);
+                    }else{
+                        layer.msg(res.msg, {time: 2000});
+                    }
+                }
+            },
+            error : function() {
+                layer.msg("异常！");
+            }
+        });
+    }
+
+    function getLevel(family_id, generation_id) {
+        $.ajax({
+            type: "GET",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "${pageContext.request.contextPath}/gen/member/findMemberLevelList?family_id="+family_id+"&generation_id="+generation_id,//url
+            data: "",
+            success: function (res) {
+                if (res.success) {
+                    var tt = '<option value=""></option>';
+                    $.each(res.data,function(i,n){
+                        tt += '<option value="'+ n.id+'">'+ n.name+'</option>';
+                    });
+                    $("#level").html(tt);
+                    form.render('select');
+                }else{
+                    if(res.loseSession=='loseSession'){
+                        loseSession(res.msg,res.url);
+                    }else{
+                        layer.msg(res.msg, {time: 2000});
+                    }
+                }
+            },
+            error : function() {
+                layer.msg("异常！");
+            }
+        });
     }
 
 
@@ -283,11 +313,6 @@
         tt += '<td><input type="text" name="w_name" lay-verify="title" autocomplete="off" placeholder="请输入家属姓名" class="layui-input"></td>';
         tt += '<td><input type="text" name="w_content" lay-verify="title" autocomplete="off" placeholder="请输入家属介绍" class="layui-input"></td>';
         tt += '<td><input type="text" name="w_level" lay-verify="title" autocomplete="off" placeholder="请输入家属排行" class="layui-input"></td>';
-        <%--tt += '<td><select name="w_level" id="w_level" onchange="" style="height: 30px;width: 190px;float: right;"  class="layui-input layui-unselect tfield-all">';--%>
-        <%--$.each(${levelLsJson},function(i,n){--%>
-            <%--tt += '<option value="'+ n.id+'">'+ n.name+'</option>';--%>
-        <%--});--%>
-        <%--tt += '</select></td>';--%>
         tt += '<td><input type="text" name="w_remark" lay-verify="title" autocomplete="off" placeholder="请输入备注" value="" class="layui-input"></td>';
         tt += '<td style="width: 78px;"><div class="layui-btn-group"><button type="button" onclick="addLine();" class="layui-btn layui-btn-xs"><i class="layui-icon"></i></button><button type="button" onclick="delLine(\''+index+'\');" class="layui-btn layui-btn-xs layui-btn-danger"><i class="layui-icon"></i></button></div></td>';
         tt += '</tr>';

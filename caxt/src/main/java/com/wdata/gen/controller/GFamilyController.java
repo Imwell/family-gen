@@ -202,7 +202,7 @@ public class GFamilyController extends BaseController {
         memberPd.put("name", pd.get("name"));
         memberPd.put("status", Const.STATUS);
         memberPd.put("content", Const.MEMBER_ORIGIN_CONTENT);
-        memberPd.put("level", LevelEnum.LEVEL_1.getLevel());
+        memberPd.put("level", LevelEnum.LEVEL_1.getId());
 
         int memberId = memberService.save(memberPd);
 

@@ -25,10 +25,6 @@
     <c:if test="${fn:contains(pd.authParam,'auth')}">
         <button class="layui-btn layui-btn-primary layui-btn-sm" id="auths"><i class="layui-icon layui-icon-auz"></i>数据权限</button>
     </c:if>
-
-        <button class="layui-btn layui-btn-primary layui-btn-sm" id="synchUserWxAccount"><i class="layui-icon layui-icon-auz"></i>企业微信账号同步</button>
-
-
     <span class="layui-btn layui-btn-sm" id="current_org"></span>
     <a class="layui-btn layui-btn-sm" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
     <a class="layui-btn layui-btn-sm" style="line-height:1.6em;margin-top:3px;float:right;line-height: 30px"  onclick="clearOrg();" title="清除组织">清除组织</a>

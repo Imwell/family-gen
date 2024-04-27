@@ -146,6 +146,9 @@
 				<if test="mother_id != null and mother_id != ''">
 					and a.mother_id = #{mother_id}
 				</if>
+				<if test="self != null and self != ''">
+					and a.self = #{self}
+				</if>
 				order by a.order_by+0 asc, a.create_time desc
 	</select>
 
@@ -172,7 +175,25 @@
 			a.create_time as "create_time",
 			a.update_time as "update_time"
 			from gen_member a
-			where a.id = #{id}
+			where 1=1
+			<if test="id != null and id != ''">
+				a.id = #{id}
+			</if>
+			<if test="family_id != null and family_id != ''">
+				and a.family_id = #{family_id}
+			</if>
+			<if test="generation_id != null and generation_id != ''">
+				and a.generation_id = #{generation_id}
+			</if>
+			<if test="father_id != null and father_id != ''">
+				and a.father_id = #{father_id}
+			</if>
+			<if test="mother_id != null and mother_id != ''">
+				and a.mother_id = #{mother_id}
+			</if>
+			<if test="self != null and self != ''">
+				and a.self = #{self}
+			</if>
 	</select>
 
 

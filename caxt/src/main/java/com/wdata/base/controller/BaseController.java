@@ -92,7 +92,7 @@ public class BaseController {
      */ 
     public void writeJson(HttpServletResponse response, Object object) throws IOException {
 
-        response.setContentType("text/html;charset=utf-8");
+        response.setContentType("application/json;charset=utf-8");
         ObjectMapper objMapper = new ObjectMapper();
         JsonGenerator jsonGenerator = objMapper.getFactory()
                 .createGenerator(response.getOutputStream(),

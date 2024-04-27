@@ -31,14 +31,6 @@
                     </c:forEach>
                 </select>
             </div>
-            <div class="layui-inline">
-                <label class="layui-form-lab" style="width: auto">状态</label>
-                <select name="status" id="status" style="height: 30px;width: 190px;float: right;"  class="layui-input layui-unselect tfield-all">
-                    <option value="">请选择...</option>
-                    <option value="Y">启用</option>
-                    <option value="N">停用</option>
-                </select>
-            </div>
         </div>
         <div class="layui-form-item" style="position: absolute;right:25px;bottom:6px;">
             <a href="javascript:;" class="layui-btn layui-btn-sm" data-type="reload">
