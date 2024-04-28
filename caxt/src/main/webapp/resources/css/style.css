@@ -15,9 +15,12 @@ body {
 #chart-container {
   position: relative;
   display: inline-block;
+  background-image: url("../images/gen-bg.jpg");
+  background-size: cover;
+  background-position: bottom;
   top: 10px;
   left: 10px;
-  height: 540px;
+  /*height: 540px;*/
   width: calc(100% - 24px);
   border: 2px dashed #aaa;
   border-radius: 5px;

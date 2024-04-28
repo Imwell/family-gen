@@ -170,7 +170,7 @@
     </div>
     <div class="layui-footer footer footer-demo" id="admin-footer">
         <div class="layui-main">
-            <p>2017 &copy;
+            <p> &copy;
                 <a href="#">官网</a>
             </p>
         </div>
