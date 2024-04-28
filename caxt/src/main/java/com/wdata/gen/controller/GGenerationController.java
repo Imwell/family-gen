@@ -4,6 +4,7 @@ import com.wdata.base.controller.BaseController;
 import com.wdata.base.util.*;
 import com.wdata.gen.service.GFamilyService;
 import com.wdata.gen.service.GGenerationService;
+import com.wdata.gen.service.GMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**  
  * @Title: generationController
@@ -30,6 +32,8 @@ public class GGenerationController extends BaseController {
     private GGenerationService generationService;
     @Autowired
     private GFamilyService familyService;
+    @Autowired
+    private GMemberService memberService;
 
     /** 
      * @Description: index 
@@ -202,6 +206,31 @@ public class GGenerationController extends BaseController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public void update(HttpServletRequest request,HttpServletResponse response) throws IOException  {
         PageData pd = new PageData(request);
+
+        PageData genPd = new PageData();
+        genPd.put("id", pd.get("id"));
+        PageData info = generationService.findInfo(genPd);
+        if (null == info) {
+            Json json = Result.error("世代不存在");
+            this.writeJson(response,json);
+            return;
+        }
+
+        PageData pageData = new PageData();
+        pageData.put("generation_id", genPd.getString("id"));
+        List<PageData> list = memberService.findList(pageData);
+        if (list.isEmpty()) {
+            Json json = Result.error("世代成员不存在");
+            this.writeJson(response,json);
+            return;
+        }
+        List<PageData> collect = list.stream().filter(item -> String.valueOf(Const.ORIGIN_ID).equals(item.getString("father_id")))
+                .collect(Collectors.toList());
+        if (!collect.isEmpty()) {
+            Json json = Result.error("不能编辑初始世代");
+            this.writeJson(response,json);
+            return;
+        }
 
         String time = DateTimeUtil.getDateTimeStr();
         pd.put("create_time", time);

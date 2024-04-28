@@ -34,6 +34,7 @@
             </select>
             <button class="layui-btn layui-btn-sm" lay-submit="" lay-filter="submit_form">生成</button>
         </div>
+        <a class="layui-btn layui-btn-sm" style="line-height:1.6em;margin-top:3px;float:right;margin-left: 10px;"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
         <div align="right"><button class="layui-btn layui-btn-normal layui-btn-sm" onclick="importImg()">导出图片</button></div>
     </div>
     <div id="chart-container"></div>

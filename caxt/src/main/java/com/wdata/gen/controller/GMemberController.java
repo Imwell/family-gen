@@ -287,23 +287,31 @@ public class GMemberController extends BaseController {
     public void update(HttpServletRequest request, HttpServletResponse response) throws IOException {
         PageData pd = new PageData(request);
 
-        if ("1".equals(pd.getString("self"))) {
-            PageData memberPd = new PageData();
-            memberPd.put("self", 1);
-            memberPd.put("id", pd.get("id"));
-            PageData info = memberService.findInfo(memberPd);
+        PageData memberPd = new PageData();
+        memberPd.put("id", pd.get("id"));
+        PageData info = memberService.findInfo(memberPd);
+        if (null == info) {
+            Json json = Result.error("成员不存在");
+            this.writeJson(response, json);
+            return;
+        }
+        if (String.valueOf(Const.ORIGIN_ID).equals(info.getString("father_id"))) {
+            Json json = Result.error("不能修改初始成员");
+            this.writeJson(response, json);
+            return;
+        }
+
+        if ("1".equals(info.getString("self"))) {
             PageData pageData = new PageData();
             pageData.put("self", 1);
             List<PageData> list = memberService.findList(pageData);
-            if (null == info && !list.isEmpty()) {
-                Json json = new Json();
-                json.setCode(500);
-                json.setSuccess(false);
-                json.setMsg("存在相同本人");
+            if (!list.isEmpty()) {
+                Json json = Result.error("存在相同本人");
                 this.writeJson(response, json);
                 return;
             }
         }
+
 
         String time = DateTimeUtil.getDateTimeStr();
         pd.put("create_time", time);
