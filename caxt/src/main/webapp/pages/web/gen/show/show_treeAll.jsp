@@ -80,7 +80,7 @@
             var img = convertCanvasToImage(canvas);
             //调用下载方法 封装的下载方法，都在资源里面
             if (browserIsIe()) {  //假如是ie浏览器
-                DownLoadReportIMG('安氏家谱.png', img.src);
+                DownLoadReportIMG('家谱.png', img.src);
             } else {
                 downloadImage(img.src)  //下载图片
             }
@@ -126,7 +126,6 @@
             'zoomoutLimit': 1,
             'exportFilename':'家谱',
 //            'exportFileextension': 'pdf',
-            'exportFilename': 'MyOrgChart'
         });
     }
 
